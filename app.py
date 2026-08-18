@@ -1,5 +1,4 @@
 """Local web server for the Bioreactor login page.
-
 Run from this folder with: py app.py
 Then open: http://localhost:8000
 """
@@ -16,6 +15,8 @@ import secrets
 import sqlite3
 from threading import Lock
 from urllib.parse import urlparse
+from flask import Flask
+app = Flask(__name__)
 
 
 BASE_DIR = Path(__file__).resolve().parent
