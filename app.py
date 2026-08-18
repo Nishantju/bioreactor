@@ -190,7 +190,14 @@ class BioreactorRequestHandler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     if not DATABASE_PATH.exists():
-        raise FileNotFoundError(f"Database not found: {DATABASE_PATH}")
+        with sqlite3.connect(DATABASE_PATH) as connection:
+            connection.execute("""
+                CREATE TABLE login_page (
+                    username TEXT,
+                    password TEXT
+                )
+            """)
+            connection.commit()
 
 
     port = int(os.environ.get("PORT", 8000))
