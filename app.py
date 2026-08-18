@@ -200,7 +200,7 @@ if __name__ == "__main__":
 
             connection.execute(
                 "INSERT INTO login_page (username, password) VALUES (?, ?)",
-                ("admin", "12345")
+                ("nishantcs121", "nk2004")
             )
 
             connection.commit()
