@@ -16,11 +16,8 @@ import sqlite3
 from threading import Lock
 from urllib.parse import urlparse
 from flask import Flask
-app = Flask(__name__)
+import os
 
-@app.route("/")
-def home():
-    return render_template("bioreactor.html")
     
 BASE_DIR = Path(__file__).resolve().parent
 DATABASE_PATH = BASE_DIR / "login.db"
@@ -196,7 +193,10 @@ if __name__ == "__main__":
     if not DATABASE_PATH.exists():
         raise FileNotFoundError(f"Database not found: {DATABASE_PATH}")
 
-    server = ThreadingHTTPServer(("127.0.0.1", 8000), BioreactorRequestHandler)
+
+    port = int(os.environ.get("PORT", 8000))
+
+    server = ThreadingHTTPServer(("0.0.0.0", port), BioreactorRequestHandler)
     print("Bioreactor login is running at http://localhost:8000")
     try:
         server.serve_forever()
