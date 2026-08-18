@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bioreactor Login</title>
+    <link rel="stylesheet" href="bioreactor.css">
+</head>
+<body>
+    <main class="page-content">
+        <section class="login-card" aria-labelledby="login-title">
+            <div class="reactor-symbol" aria-hidden="true">
+                <svg viewBox="0 0 96 96" role="img">
+                    <path class="reactor-pipe" d="M35 18v12M61 18v12M29 30h38v50a8 8 0 0 1-8 8H37a8 8 0 0 1-8-8V30Z" />
+                    <path class="reactor-pipe" d="M22 30h52M39 18h18" />
+                    <path class="reactor-liquid" d="M30 60c8-5 14 5 22 0s12 4 15 1v19a8 8 0 0 1-8 8H37a8 8 0 0 1-8-8V61Z" />
+                    <circle class="reactor-bubble" cx="43" cy="48" r="3" />
+                    <circle class="reactor-bubble" cx="55" cy="42" r="2.5" />
+                    <circle class="reactor-bubble" cx="56" cy="53" r="2" />
+                </svg>
+            </div>
+
+            <p class="eyebrow">PROCESS CONTROL SYSTEM</p>
+            <h1 id="login-title">Bioreactor Login</h1>
+            <p class="intro">Sign in to monitor and manage your bioreactor.</p>
+
+            <form id="login-form" novalidate>
+                <div class="field-group">
+                    <label for="username">Username</label>
+                    <input id="username" name="username" type="text" autocomplete="username" placeholder="Enter your username" aria-describedby="login-message" required>
+                </div>
+
+                <div class="field-group">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" aria-describedby="login-message" required>
+                </div>
+
+                <p id="login-message" class="login-message" role="alert" aria-live="polite" aria-atomic="true" hidden></p>
+
+                <div class="form-options">
+                    <label class="remember-me" for="remember">
+                        <input id="remember" name="remember" type="checkbox">
+                        Remember me
+                    </label>
+                    <a href="#">Forgot password?</a>
+                </div>
+
+                <button id="login-button" type="submit">Log in</button>
+            </form>
+        </section>
+    </main>
+    <script src="bioreactor.js" defer></script>
+</body>
+</html>

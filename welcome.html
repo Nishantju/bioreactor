@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bioreactor Biochemical Equations</title>
+    <link rel="stylesheet" href="welcome.css">
+</head>
+<body>
+    <main class="equation-page">
+        <header class="page-header">
+            <div class="header-actions">
+                <button id="viewer-button" class="viewer-button" type="button">3D Viewer</button>
+                <button id="logout-button" class="logout-button" type="button">Log out</button>
+            </div>
+            <p class="eyebrow">BIOREACTOR REFERENCE</p>
+            <h1>Biochemical Equations</h1>
+            <p>Key metabolic reactions and bioprocess equations used in bioreactor systems.</p>
+        </header>
+
+        <section class="equation-grid" aria-label="Biochemical equations">
+            <article class="equation-card reaction">
+                <p class="category">Energy conversion</p>
+                <h2>Photosynthesis</h2>
+                <p class="equation">6CO<sub>2</sub> + 6H<sub>2</sub>O + light energy → C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6O<sub>2</sub></p>
+            </article>
+
+            <article class="equation-card reaction">
+                <p class="category">Energy conversion</p>
+                <h2>Aerobic Respiration</h2>
+                <p class="equation">C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6O<sub>2</sub> → 6CO<sub>2</sub> + 6H<sub>2</sub>O + energy (ATP)</p>
+            </article>
+
+            <article class="equation-card reaction">
+                <p class="category">Fermentation</p>
+                <h2>Alcoholic Fermentation</h2>
+                <p class="equation">C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> → 2C<sub>2</sub>H<sub>5</sub>OH + 2CO<sub>2</sub> + energy</p>
+            </article>
+
+            <article class="equation-card reaction">
+                <p class="category">Fermentation</p>
+                <h2>Lactic Acid Fermentation</h2>
+                <p class="equation">C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> → 2C<sub>3</sub>H<sub>6</sub>O<sub>3</sub> + energy</p>
+            </article>
+
+            <article class="equation-card reaction">
+                <p class="category">Anaerobic digestion</p>
+                <h2>Methanogenesis</h2>
+                <p class="equation">CO<sub>2</sub> + 4H<sub>2</sub> → CH<sub>4</sub> + 2H<sub>2</sub>O</p>
+            </article>
+
+            <article class="equation-card reaction">
+                <p class="category">Nitrogen cycle</p>
+                <h2>Nitrification — Step 1</h2>
+                <p class="equation">NH<sub>4</sub><sup>+</sup> + 1.5O<sub>2</sub> → NO<sub>2</sub><sup>−</sup> + 2H<sup>+</sup> + H<sub>2</sub>O</p>
+            </article>
+
+            <article class="equation-card reaction">
+                <p class="category">Nitrogen cycle</p>
+                <h2>Nitrification — Step 2</h2>
+                <p class="equation">NO<sub>2</sub><sup>−</sup> + 0.5O<sub>2</sub> → NO<sub>3</sub><sup>−</sup></p>
+            </article>
+
+            <article class="equation-card reaction">
+                <p class="category">Nitrogen cycle</p>
+                <h2>Denitrification</h2>
+                <p class="equation">2NO<sub>3</sub><sup>−</sup> + 10e<sup>−</sup> + 12H<sup>+</sup> → N<sub>2</sub> + 6H<sub>2</sub>O</p>
+            </article>
+
+            <article class="equation-card process">
+                <p class="category">Biomass growth</p>
+                <h2>Cell Growth Rate</h2>
+                <p class="equation">dX/dt = μX</p>
+                <p class="definition"><strong>X</strong> = biomass concentration; <strong>μ</strong> = specific growth rate</p>
+            </article>
+
+            <article class="equation-card process">
+                <p class="category">Biomass growth</p>
+                <h2>Monod Growth Model</h2>
+                <p class="equation">μ = μ<sub>max</sub>S / (K<sub>s</sub> + S)</p>
+                <p class="definition"><strong>S</strong> = substrate concentration; <strong>K<sub>s</sub></strong> = half-saturation constant</p>
+            </article>
+
+            <article class="equation-card process">
+                <p class="category">Bioprocess yield</p>
+                <h2>Substrate Consumption</h2>
+                <p class="equation">dS/dt = −(1 / Y<sub>X/S</sub>)(dX/dt)</p>
+                <p class="definition"><strong>Y<sub>X/S</sub></strong> = biomass yield from substrate</p>
+            </article>
+
+            <article class="equation-card process">
+                <p class="category">Oxygen transfer</p>
+                <h2>Oxygen Transfer Rate</h2>
+                <p class="equation">OTR = k<sub>L</sub>a(C* − C<sub>L</sub>)</p>
+                <p class="definition"><strong>k<sub>L</sub>a</strong> = volumetric mass-transfer coefficient</p>
+            </article>
+        </section>
+    </main>
+
+    <dialog id="viewer-dialog" class="viewer-dialog" aria-labelledby="viewer-title">
+        <div class="viewer-header">
+            <div>
+                <p class="eyebrow">MODEL VISUALIZATION</p>
+                <h2 id="viewer-title">RQ-4 Global Hawk</h2>
+            </div>
+            <button id="viewer-close" class="viewer-close" type="button" aria-label="Close 3D viewer">&times;</button>
+        </div>
+        <div class="viewer-canvas-wrap">
+            <canvas id="viewer-canvas" aria-label="Interactive 3D RQ-4 Global Hawk model"></canvas>
+            <p id="viewer-status" class="viewer-status" role="status">Loading 3D model&hellip;</p>
+        </div>
+        <p class="viewer-help">Drag to rotate, scroll to zoom, and right-drag to pan.</p>
+    </dialog>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.1/examples/jsm/"
+            }
+        }
+    </script>
+    <script src="bioreactor.js" defer></script>
+    <script type="module">
+        import * as THREE from "three";
+        import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+        import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+        const viewerButton = document.querySelector("#viewer-button");
+        const viewerDialog = document.querySelector("#viewer-dialog");
+        const closeViewerButton = document.querySelector("#viewer-close");
+        const viewerCanvas = document.querySelector("#viewer-canvas");
+        const viewerStatus = document.querySelector("#viewer-status");
+
+        if (viewerButton && viewerDialog && closeViewerButton && viewerCanvas && viewerStatus) {
+            let renderer;
+            let camera;
+            let controls;
+            let animationFrame;
+            let isRendering = false;
+
+            const resizeViewer = () => {
+                if (!renderer || !camera) return;
+
+                const { width, height } = viewerCanvas.parentElement.getBoundingClientRect();
+                renderer.setSize(width, height, false);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+            };
+
+            const renderFrame = () => {
+                if (!isRendering) return;
+                animationFrame = requestAnimationFrame(renderFrame);
+                controls.update();
+                renderer.render(renderer.scene, camera);
+            };
+
+            const startRendering = () => {
+                if (isRendering || !renderer) return;
+                isRendering = true;
+                renderFrame();
+            };
+
+            const stopRendering = () => {
+                isRendering = false;
+                cancelAnimationFrame(animationFrame);
+            };
+
+            const initialiseViewer = () => {
+                if (renderer) return;
+
+                const scene = new THREE.Scene();
+                scene.background = new THREE.Color("#e8f6ff");
+
+                renderer = new THREE.WebGLRenderer({ canvas: viewerCanvas, antialias: true });
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                renderer.outputColorSpace = THREE.SRGBColorSpace;
+                renderer.scene = scene;
+
+                camera = new THREE.PerspectiveCamera(42, 1, 0.1, 1000);
+                camera.position.set(7, 4, 7);
+
+                controls = new OrbitControls(camera, viewerCanvas);
+                controls.enableDamping = true;
+                controls.minDistance = 1;
+                controls.maxDistance = 35;
+
+                scene.add(new THREE.HemisphereLight("#ffffff", "#52758a", 2.5));
+                const keyLight = new THREE.DirectionalLight("#ffffff", 3);
+                keyLight.position.set(6, 8, 5);
+                scene.add(keyLight);
+
+                const grid = new THREE.GridHelper(16, 20, "#6dbfe9", "#b8e3f7");
+                grid.position.y = -1.6;
+                scene.add(grid);
+
+                const loader = new GLTFLoader();
+                loader.load(
+                    "/rq4_global_hawk.glb",
+                    (gltf) => {
+                        const model = gltf.scene;
+                        const bounds = new THREE.Box3().setFromObject(model);
+                        const size = bounds.getSize(new THREE.Vector3());
+                        const centre = bounds.getCenter(new THREE.Vector3());
+                        const largestDimension = Math.max(size.x, size.y, size.z);
+                        const distance = largestDimension * 1.7;
+
+                        model.position.sub(centre);
+                        scene.add(model);
+                        camera.near = Math.max(largestDimension / 100, 0.01);
+                        camera.far = largestDimension * 100;
+                        camera.position.set(distance, distance * 0.55, distance);
+                        controls.minDistance = largestDimension * 0.6;
+                        controls.maxDistance = largestDimension * 6;
+                        controls.update();
+                        camera.updateProjectionMatrix();
+                        viewerStatus.hidden = true;
+                        resizeViewer();
+                    },
+                    undefined,
+                    () => {
+                        viewerStatus.textContent = "The 3D model could not be loaded.";
+                    },
+                );
+
+                new ResizeObserver(resizeViewer).observe(viewerCanvas.parentElement);
+                resizeViewer();
+            };
+
+            viewerButton.addEventListener("click", () => {
+                viewerDialog.showModal();
+                initialiseViewer();
+                resizeViewer();
+                startRendering();
+            });
+
+            closeViewerButton.addEventListener("click", () => viewerDialog.close());
+            viewerDialog.addEventListener("close", stopRendering);
+        }
+    </script>
+</body>
+</html>

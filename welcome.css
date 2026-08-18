@@ -1,0 +1,265 @@
+:root {
+    --page-background: #e2e7e9;
+    --card-background: #f5f8f9;
+    --text: #172c35;
+    --muted-text: #5b6a70;
+    --teal: #176e6a;
+    --line: #c5d0d4;
+    --blue-shadow: rgba(83, 181, 231, 0.38);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    margin: 0;
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at top left, #eef6f7 0, transparent 28rem),
+        var(--page-background);
+}
+
+.equation-page {
+    width: min(100% - 2.5rem, 75rem);
+    margin: 0 auto;
+    padding: 3.5rem 0 4rem;
+}
+
+.page-header {
+    position: relative;
+    max-width: 43rem;
+    margin-bottom: 2.25rem;
+}
+
+.header-actions {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.5rem;
+    z-index: 2;
+    display: flex;
+    gap: 0.65rem;
+}
+
+.logout-button,
+.viewer-button {
+    padding: 0.7rem 1.05rem;
+    color: #123d50;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    background: #aee4fa;
+    border: 1px solid #6dc3e9;
+    border-radius: 999px;
+    box-shadow: 0.2rem 0.25rem 0.8rem rgba(65, 157, 205, 0.35);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.viewer-button {
+    color: #ffffff;
+    background: #176e9d;
+    border-color: #176e9d;
+}
+
+.logout-button:hover,
+.viewer-button:hover {
+    background: #83d4f3;
+    transform: translateY(-2px);
+}
+
+.viewer-button:hover {
+    color: #ffffff;
+    background: #115a82;
+}
+
+.logout-button:focus-visible,
+.viewer-button:focus-visible {
+    outline: 3px solid #176e6a;
+    outline-offset: 3px;
+}
+
+.viewer-dialog {
+    width: min(92vw, 62rem);
+    padding: 0;
+    overflow: hidden;
+    color: var(--text);
+    background: #f8fcff;
+    border: 1px solid #8bc9e8;
+    border-radius: 1rem;
+    box-shadow: 0 1.5rem 4rem rgba(25, 90, 123, 0.38);
+}
+
+.viewer-dialog::backdrop {
+    background: rgba(10, 42, 62, 0.58);
+    backdrop-filter: blur(0.2rem);
+}
+
+.viewer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.15rem 1.3rem;
+    background: #e2f4fe;
+    border-bottom: 1px solid #afd9ee;
+}
+
+.viewer-header h2 {
+    margin: 0.32rem 0 0;
+    font-size: 1.35rem;
+}
+
+.viewer-close {
+    display: grid;
+    width: 2.35rem;
+    height: 2.35rem;
+    padding: 0;
+    color: #185575;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    background: #ffffff;
+    border: 1px solid #9ccfe7;
+    border-radius: 50%;
+    place-items: center;
+}
+
+.viewer-close:hover {
+    color: #ffffff;
+    background: #176e9d;
+}
+
+.viewer-canvas-wrap {
+    position: relative;
+    height: min(62vh, 36rem);
+    min-height: 20rem;
+}
+
+#viewer-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    outline: none;
+}
+
+.viewer-status {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    padding: 0.7rem 1rem;
+    color: #185575;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.88);
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+}
+
+.viewer-help {
+    margin: 0;
+    padding: 0.8rem 1.3rem;
+    color: var(--muted-text);
+    font-size: 0.87rem;
+    text-align: center;
+    background: #ffffff;
+}
+
+.eyebrow,
+.category {
+    margin: 0;
+    color: var(--teal);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0.4rem 0 0.65rem;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+}
+
+.page-header > p:last-child {
+    margin: 0;
+    color: var(--muted-text);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.equation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.3rem;
+}
+
+.equation-card {
+    display: flex;
+    min-height: 13.5rem;
+    padding: 1.45rem;
+    flex-direction: column;
+    background: var(--card-background);
+    border: 1px solid var(--line);
+    border-left: 5px solid var(--teal);
+    border-radius: 0.8rem;
+    box-shadow: 0.5rem 0.6rem 1.25rem var(--blue-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.equation-card:hover {
+    box-shadow: 0.7rem 0.8rem 1.5rem rgba(83, 181, 231, 0.5);
+    transform: translateY(-0.2rem);
+}
+
+.equation-card h2 {
+    margin: 0.55rem 0 1.1rem;
+    font-size: 1.18rem;
+}
+
+.equation {
+    margin: auto 0 0;
+    padding: 0.85rem;
+    color: #103f45;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.08rem;
+    font-weight: 700;
+    line-height: 1.7;
+    text-align: center;
+    background: #e4f3f4;
+    border-radius: 0.45rem;
+}
+
+.process .equation {
+    color: #21406a;
+    background: #e5eef8;
+}
+
+.definition {
+    margin: 1rem 0 0;
+    color: var(--muted-text);
+    font-size: 0.82rem;
+    line-height: 1.45;
+}
+
+sub,
+sup {
+    line-height: 0;
+}
+
+@media (max-width: 550px) {
+    .equation-page {
+        width: min(100% - 1.5rem, 75rem);
+        padding: 2.2rem 0 3rem;
+    }
+
+    .equation-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header-actions {
+        position: static;
+        margin-bottom: 1.5rem;
+    }
+}
