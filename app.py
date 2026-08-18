@@ -197,6 +197,12 @@ if __name__ == "__main__":
                     password TEXT
                 )
             """)
+
+            connection.execute(
+                "INSERT INTO login_page (username, password) VALUES (?, ?)",
+                ("admin", "12345")
+            )
+
             connection.commit()
 
 
