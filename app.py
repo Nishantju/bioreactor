@@ -18,7 +18,10 @@ from urllib.parse import urlparse
 from flask import Flask
 app = Flask(__name__)
 
-
+@app.route("/")
+def home():
+    return render_template("bioreactor.html")
+    
 BASE_DIR = Path(__file__).resolve().parent
 DATABASE_PATH = BASE_DIR / "login.db"
 SESSIONS: set[str] = set()
