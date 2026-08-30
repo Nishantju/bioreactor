@@ -31,6 +31,7 @@ STATIC_FILES = {
     "/welcome.css": ("welcome.css", "text/css; charset=utf-8"),
     "/bioreactor.js": ("bioreactor.js", "application/javascript; charset=utf-8"),
     "/rq4_global_hawk.glb": ("rq4_global_hawk.glb", "model/gltf-binary"),
+    "/bio2.png": ("bio2.png", "image/png"), 
 }
 
 
